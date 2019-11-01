@@ -11,6 +11,10 @@ namespace projektGK1_2._0
         public VertexPoint a;
         public VertexPoint b;
 
+        public double x_min;
+
+        public double one_div_m;
+
         public Edge( VertexPoint a_, VertexPoint b_)
         {
             if (a_.Get().Y < b_.Get().Y)
@@ -22,7 +26,22 @@ namespace projektGK1_2._0
             {
                 a = b_;
                 b = a_;
-            } 
+            }
+            SetXmin();
+            CalculateOneDivM();
+        }
+
+        public void SetXmin()
+        {
+            x_min = a.Get().X;
+        }
+        public void CalculateOneDivM()
+        {
+            if (a.Get().Y == b.Get().Y) one_div_m = 0;
+            else
+            {
+                one_div_m = (double)(b.Get().X - a.Get().X) / (double)(b.Get().Y - a.Get().Y);
+            }
         }
     }
 }

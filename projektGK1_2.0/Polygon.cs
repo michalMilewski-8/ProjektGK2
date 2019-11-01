@@ -38,7 +38,7 @@ namespace projektGK1_2._0
             vertices.Add(point);
             MakeEdges();
         }
-        private void MakeEdges()
+        public void MakeEdges()
         {
             edges = new List<Edge>();
             for (int i = 0; i < vertices.Count - 1; i++)
