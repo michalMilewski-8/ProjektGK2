@@ -32,7 +32,7 @@ namespace projektGK1_2._0
         private List<Polygon> triangles_net;
         private VertexPoint[,] vertices;
         private static Size vartice_size = new Size(10, 10);
-        private static int MouseBias = 5;
+        private const int MouseBias = 5;
         private VertexPoint currently_changed_vertex;
         private bool moving = false;
         private Color fill_color;
@@ -42,7 +42,7 @@ namespace projektGK1_2._0
         private BmpPixelSnoop normalMap;
         private BmpPixelSnoop tmpPicture;
         private PointInSpace light_source = new PointInSpace();
-        private double degree = Math.PI / 180;
+        private readonly double degree = Math.PI / 180;
         private int current_degree = 0;
         private int current_z_degree = 0;
         private double radius;
@@ -52,7 +52,7 @@ namespace projektGK1_2._0
         double Ks = 0.50;
         double Kd = 0.50;
         int M = 1;
-        private Random rand = new Random();
+        private readonly Random rand = new Random();
 
 
         private void CreateNet(int xcount, int ycount)
@@ -107,8 +107,6 @@ namespace projektGK1_2._0
         {
             return a.X * b.Y - a.Y * b.X;
         }
-
-
 
         private double cosin(Vector3 v, Vector3 b)
         {
@@ -306,24 +304,24 @@ namespace projektGK1_2._0
             Color preva = fill_color;
             Color prevb = fill_color;
             Color prevc = fill_color;
-            if (!selectObjectColor.Checked&& texture_loaded)
+            if (!selectObjectColor.Checked && texture_loaded)
             {
-                 preva = textureBmp.GetPixel(pointa.X % textureBmp.Width, pointa.Y % textureBmp.Height);
-                 prevb = textureBmp.GetPixel(pointb.X % textureBmp.Width, pointb.Y % textureBmp.Height);
-                 prevc = textureBmp.GetPixel(pointc.X % textureBmp.Width, pointc.Y % textureBmp.Height);
+                preva = textureBmp.GetPixel(pointa.X % textureBmp.Width, pointa.Y % textureBmp.Height);
+                prevb = textureBmp.GetPixel(pointb.X % textureBmp.Width, pointb.Y % textureBmp.Height);
+                prevc = textureBmp.GetPixel(pointc.X % textureBmp.Width, pointc.Y % textureBmp.Height);
             }
 
             var Na = new Vector3(0, 0, 1);
             var Nb = new Vector3(0, 0, 1);
             var Nc = new Vector3(0, 0, 1);
-            if (!staticVector.Checked&& normal_map_loaded)
+            if (!staticVector.Checked && normal_map_loaded)
             {
                 var color = new ColorVector(normalMap.GetPixel(pointa.X % normalMap.Width, pointa.Y % normalMap.Height));
-                 Na = new Vector3(color.R, color.G, color.B);
+                Na = new Vector3(color.R, color.G, color.B);
                 color = new ColorVector(normalMap.GetPixel(pointb.X % normalMap.Width, pointb.Y % normalMap.Height));
-                 Nb = new Vector3(color.R, color.G, color.B);
+                Nb = new Vector3(color.R, color.G, color.B);
                 color = new ColorVector(normalMap.GetPixel(pointc.X % normalMap.Width, pointc.Y % normalMap.Height));
-                 Nc = new Vector3(color.R, color.G, color.B);
+                Nc = new Vector3(color.R, color.G, color.B);
             }
 
 
@@ -593,9 +591,11 @@ namespace projektGK1_2._0
 
         private void button1_Click(object sender, EventArgs e)
         {
-            colorDialog1.ShowDialog();
-            light_color = new ColorVector(colorDialog1.Color);
-            drawing_panel.Invalidate();
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                light_color = new ColorVector(colorDialog1.Color);
+                drawing_panel.Invalidate();
+            }
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -614,9 +614,11 @@ namespace projektGK1_2._0
 
         private void selectColor_Click(object sender, EventArgs e)
         {
-            colorDialog1.ShowDialog();
-            fill_color = colorDialog1.Color;
-            drawing_panel.Invalidate();
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                fill_color = colorDialog1.Color;
+                drawing_panel.Invalidate();
+            }
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
