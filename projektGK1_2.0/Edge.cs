@@ -26,7 +26,7 @@ namespace projektGK1_2._0
             {
                 a = b_;
                 b = a_;
-            }
+            }             
             SetXmin();
             CalculateOneDivM();
         }
