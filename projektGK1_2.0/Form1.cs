@@ -23,7 +23,7 @@ namespace projektGK1_2._0
         {
             InitializeComponent();
             fill_color = Color.Silver;
-            light_color = new ColorVector(Color.White);
+            light_color = new ColorVectorREal(Color.White);
             CreateNet(NetSize, NetSize);
             drawing_panel.Invalidate();
             light_source.Z = 10;
@@ -36,7 +36,7 @@ namespace projektGK1_2._0
         private VertexPoint currently_changed_vertex;
         private bool moving = false;
         private Color fill_color;
-        private ColorVector light_color;
+        private ColorVectorREal light_color;
         private Vector3 V = new Vector3(0, 0, 1);
         private BmpPixelSnoop textureBmp;
         private BmpPixelSnoop normalMap;
@@ -398,7 +398,7 @@ namespace projektGK1_2._0
             Vector3 L = new Vector3(0, 0, 1);
             if (!staticL.Checked)
             {
-                L = new Vector3(light_source.X - x, y - light_source.Y, light_source.Z);
+                L = new Vector3(light_source.X - x,y-  light_source.Y, light_source.Z);
             }
             Vector3 R = new Vector3(2 * DotProd(L, N) * N.x - L.x, 2 * DotProd(L, N) * N.y - L.y, 2 * DotProd(L, N) * N.z - L.z);
             R.Wersolize();
@@ -508,7 +508,8 @@ namespace projektGK1_2._0
             Bitmap tmp = new Bitmap(drawing_panel.Width, drawing_panel.Height);
             tmpPicture = new BmpPixelSnoop(tmp);
             Parallel.ForEach(triangles_net, (Polygon tri) =>
-             {
+           // foreach (var tri in triangles_net)
+            {
                  if (!moving)
                  {
 
@@ -593,7 +594,7 @@ namespace projektGK1_2._0
         {
             if (colorDialog1.ShowDialog() == DialogResult.OK)
             {
-                light_color = new ColorVector(colorDialog1.Color);
+                light_color = new ColorVectorREal(colorDialog1.Color);
                 drawing_panel.Invalidate();
             }
         }

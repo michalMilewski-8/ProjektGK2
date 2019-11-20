@@ -34,14 +34,31 @@ namespace projektGK1_2._0
 
         public ColorVector(Color c)
         {
-            R = ((double)c.R / 128) - 1;
-            G = ((double)c.G / 128) - 1;
+            R = ((double)c.R / 127) - 1;
+            G = ((double)c.G / 127) - 1;
             B = ((double)c.B / 255);
         }
 
         public Color ToColor()
         {
             return Color.FromArgb((int)Math.Floor((R + 1) * 127), (int)Math.Floor((G + 1) * 127), (int)Math.Floor((B + 1) * 127));
+        }
+    }
+
+    struct ColorVectorREal
+    {
+        public double R, G, B;
+
+        public ColorVectorREal(Color c)
+        {
+            R = ((double)c.R / 255);
+            G = ((double)c.G / 255) ;
+            B = ((double)c.B / 255);
+        }
+
+        public Color ToColor()
+        {
+            return Color.FromArgb((int)Math.Floor((R) * 255), (int)Math.Floor((G ) * 255), (int)Math.Floor((B) * 255));
         }
     }
 }

@@ -1,0 +1,2 @@
+Po urchomieniu programu za pomocą dostępnych przycisków można wybrać różne opcje.
+W przypadku wyboru wektroa L "Random" oznacza światło poruszające się po półsferze.
